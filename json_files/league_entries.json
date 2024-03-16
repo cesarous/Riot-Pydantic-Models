@@ -1,0 +1,32 @@
+[
+    {
+        "leagueId": "1dd167f8-6a97-45d3-b9be-75b2788724fc",
+        "queueType": "RANKED_SOLO_5x5",
+        "tier": "PLATINUM",
+        "rank": "IV",
+        "summonerId": "p3c0E1zvbMUODVXzo-2Eo9RjKcwoR-VCp0_xJ_RZg-SmnHo",
+        "summonerName": "G5 Easy",
+        "leaguePoints": 67,
+        "wins": 4,
+        "losses": 4,
+        "veteran": false,
+        "inactive": false,
+        "freshBlood": false,
+        "hotStreak": false
+    },
+    {
+        "leagueId": "28fde316-4e41-4efe-8408-984ac7880861",
+        "queueType": "RANKED_FLEX_SR",
+        "tier": "PLATINUM",
+        "rank": "I",
+        "summonerId": "p3c0E1zvbMUODVXzo-2Eo9RjKcwoR-VCp0_xJ_RZg-SmnHo",
+        "summonerName": "G5 Easy",
+        "leaguePoints": 32,
+        "wins": 12,
+        "losses": 14,
+        "veteran": false,
+        "inactive": false,
+        "freshBlood": false,
+        "hotStreak": false
+    }
+]
