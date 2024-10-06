@@ -67,9 +67,20 @@ class TeamIdEnum(int, Enum):
     RED = 200
 
 
-class Summoner(BaseModel):
+class SummonerDTO(BaseModel):
+    ###    
+        # SummonerDTO - represents a summoner
+        # Name	Data Type	Description
+        # accountId	string	Encrypted account ID. Max length 56 characters.
+        # profileIconId	int	ID of the summoner icon associated with the summoner.
+        # revisionDate	long	Date summoner was last modified specified as epoch milliseconds. The following events will update this timestamp: summoner name change, summoner level change, or profile icon change.
+        # id	string	Encrypted summoner ID. Max length 63 characters.
+        # puuid	string	Encrypted PUUID. Exact length of 78 characters.
+        # summonerLevel	long	Summoner level associated with the summoner.
+    ###
     id: str
     name: str
+    revisionDate:int
     profileIconId: int
     puuid: str
     summonerLevel: int
@@ -99,10 +110,124 @@ class miniSeriesDTO(BaseModel):
     wins: int
 
 
-class Match(BaseModel):
+class MatchDTO(BaseModel):
     metadata: 'MetadataDTO'
     info: 'MatchInfoDTO'
 
+class AbilityCastsDto(BaseModel):
+    grenadeCasts:int	
+    ability1Casts:int	
+    ability2Casts:int	
+    ultimateCasts:int
+
+class PlayerStatsDto(BaseModel):
+    score:int	
+    roundsPlayed:int	
+    kills:int	
+    deaths:int	
+    assists:int	
+    playtimeMillis:int	
+    abilityCasts:AbilityCastsDto
+
+class PlayerDTO(BaseModel):
+    puuid: str
+    gameName: str
+    tagLine:str
+    teamId: str
+    partyId:str
+    characterId:str
+    stats: PlayerStatsDto
+    competitiveTier: int
+    playerCard:str
+    playerTitle:str
+
+class CoachDTO(BaseModel):
+    puuid:str	
+    teamId:str
+
+class TeamDTO(BaseModel):
+    teamId:str	
+    won:bool	
+    roundsPlayed:int	
+    roundsWon:int	
+    numPoints:int
+
+class LocationDto(BaseModel):
+    x:int	
+    y:int
+
+class PlayerLocationsDto(BaseModel):
+    puuid:str	
+    viewRadians:float	
+    location:LocationDto
+
+class EconomyDto(BaseModel):
+    loadoutValue:int	
+    weapon:str	
+    armor:str
+    remaining:int	
+    spent:int
+class DamageDto(BaseModel):
+    receiver:str
+    damage:int	
+    legshots:int	
+    bodyshots:int	
+    headshots:int
+
+class FinishingDamageDto(BaseModel):
+    damageType:str	
+    damageItem:str	
+    isSecondaryFireMode:bool
+
+class KillDto(BaseModel):
+    timeSinceGameStartMillis:int	
+    timeSinceRoundStartMillis:int	
+    killer:str
+    victim:str
+    victimLocation:LocationDto	
+    assistants:list[str]
+    playerLocations:list[PlayerLocationsDto]	
+    finishingDamage:FinishingDamageDto	
+
+class AbilityDto(BaseModel):
+    grenadeEffects:str	
+    ability1Effects:str	
+    ability2Effects:str	
+    ultimateEffects:str
+    
+class PlayerRoundStatsDto(BaseModel):
+    puuid:str	
+    kills:list[KillDto]	
+    damage:list[DamageDto]	
+    score:int	
+    economy:EconomyDto	
+    ability:AbilityDto
+
+
+class RoundResultDto(BaseModel):
+    roundNum:int	
+    roundResult:str	
+    roundCeremony:str	
+    winningTeam:str	
+    bombPlanter:str
+    bombDefuser:str
+    plantRoundTime:int	
+    plantPlayerLocations:list[PlayerLocationsDto]	
+    plantLocation:LocationDto	
+    plantSite:str	
+    defuseRoundTime:int	
+    defusePlayerLocations:list[PlayerLocationsDto]	
+    defuseLocation:LocationDto	
+    playerStats:list[PlayerRoundStatsDto]	
+    roundResultCode:str
+
+
+class ValorantMatchDTO(BaseModel):
+    matchInfo: 'MatchInfoDTO'
+    players: list[PlayerDTO]
+    coach: list[CoachDTO]
+    teams: list[TeamDTO]
+    roundResults: list[RoundResultDto]
 
 class MetadataDTO(BaseModel):
     dataVersion: str
@@ -644,3 +769,9 @@ class WardKill(BaseEvent):
 class WardPlaced(BaseEvent):
     creatorId: int
     wardType: int
+
+
+class AccountDTO(BaseModel):
+    puuid: str
+    gameName:str
+    tagLine:str
